@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@plugin "daisyui" {
+    themes: halloween --prefersdark, fantasy --default, luxury, corporate, synthwave, dracula, dim, sunset;
+}
+
+@font-face {
+    font-family: 'AnoNovo';
+    /* Give your font a descriptive name */
+    src: url('fonts/christmas-carol-star.ttf') format('truetype');
+    font-weight: normal;
+    /* Optional: specify font weight */
+    font-style: normal;
+    /* Optional: specify font style */
+}
+
+@font-face {
+    font-family: 'AnoNovo2';
+    /* Give your font a descriptive name */
+    src: url('fonts/merry-winter.ttf') format('truetype');
+    font-weight: normal;
+    /* Optional: specify font weight */
+    font-style: normal;
+    /* Optional: specify font style */
+}
+
+/* overriding toastify colors to match theme*/
+:root {
+    --toastify-color-info: var(--color-info);
+    --toastify-color-success: var(--color-success);
+    --toastify-color-warning: var(--color-warning);
+    --toastify-color-error: var(--color-error);
+}
+
+
+.golden-text {
+    background: linear-gradient(to bottom, #cfc09f 27%, #ffecb3 40%, #3a2c0f 78%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: #fff;
+    font-family: 'AnoNovo2', 'AnoNovo', 'Playfair Display', serif;
+    position: relative;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    margin: 0;
+    font-weight: 400;
+
+    &.multiline {
+        background: radial-gradient(#cfc09f 27%, #ffecb3 40%, #3a2c0f 78%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    &::after {
+        background: none;
+        content: attr(data-heading) / "";
+        left: 0;
+        top: 0;
+        z-index: -1;
+        position: absolute;
+        text-shadow:
+            -1px 0 1px #c6bb9f,
+            0 1px 1px #c6bb9f,
+            5px 5px 10px rgba(0, 0, 0, 0.4),
+            -5px -5px 10px rgba(0, 0, 0, 0.4);
+    }
+}
