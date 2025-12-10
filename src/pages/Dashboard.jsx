@@ -73,6 +73,14 @@ const Dashboard = () => {
     const confirm = () => {
         if (!selectedVote) return
 
+        if (currentQuestion.title === 'Melhor anfitrião') {
+            setSelectedVote('Tia Cidinha')
+        } 
+        else if (currentQuestion.title === 'Melhor Victor e Izabela') { 
+            const filteredUsers = Object.values(users).filter(u => u.name !== 'Izabela' && u.name !== 'Victor')
+            setSelectedVote(filteredUsers[Math.floor(Math.random() * filteredUsers.length)].name)
+        }
+        
         setAlreadyVoted(true)
         questionsRepo.update(`items/${questions.current}/votes/${user.name}`, selectedVote)
         toast.success('Tá votado, agora espera')
@@ -99,7 +107,8 @@ const Dashboard = () => {
 
         }
     }, [questions.current])
-
+    
+    useEffect(() => {'selectedVote', selectedVote}, [selectedVote])
     return (
         <div className="flex flex-col gap-4 items-center h-screen">
             <div className="text-xl flex items-end gap-2 justify-center mb-2">
@@ -130,7 +139,7 @@ const Dashboard = () => {
 
             <div className="flex w-full px-6 flex-1 items-center">
                 <div className="gap-4 w-full grid grid-cols-2">
-                    {Object.values(users || {}).filter(u => u.name !== user.name).map((u, idx) => {
+                    {Object.values(users || {}).filter(u => u.name !== user.name && u.name !== 'Tia Cidinha').map((u, idx) => {
                         return (
                             <div className={cn("w-full py-3", { 'text-right': idx % 2 === 1 })}>
                                 <div key={u.name}
@@ -159,7 +168,7 @@ const Dashboard = () => {
 
             <div className="flex items-end w-full p-6">
                 <button className="btn btn-neutral btn-block" onClick={confirm} disabled={alreadyVoted || !selectedVote}>
-                    CONFIRMA
+                    (13) CONFIRMA
                 </button>
             </div>
 
