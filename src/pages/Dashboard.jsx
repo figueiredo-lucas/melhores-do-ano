@@ -76,13 +76,13 @@ const Dashboard = () => {
         if (currentQuestion.title === 'Melhor anfitrião') {
             // setSelectedVote('Tia Cidinha')
             vote = 'Tia Cidinha'
-        } 
-        else if (currentQuestion.title === 'Melhor Victor e Izabela') { 
+        }
+        else if (currentQuestion.title === 'Melhor Victor e Izabela') {
             const filteredUsers = Object.values(users).filter(u => u.name !== 'Izabela' && u.name !== 'Victor')
             // setSelectedVote(filteredUsers[Math.floor(Math.random() * filteredUsers.length)].name)
             vote = filteredUsers[Math.floor(Math.random() * filteredUsers.length)].name
         }
-        
+
         setAlreadyVoted(true)
         questionsRepo.update(`items/${questions.current}/votes/${user.name}`, vote)
         toast.success('Tá votado, agora espera')
@@ -103,14 +103,15 @@ const Dashboard = () => {
     useEffect(() => {
         if (prevQuestion.current !== questions.current) {
 
+            // eslint-disable-next-line react-hooks/set-state-in-effect
             setAlreadyVoted(false)
             setSelectedVote(null)
             prevQuestion.current = questions.current
 
         }
-    }, [questions.current])
-    
-    useEffect(() => {'selectedVote', selectedVote}, [selectedVote])
+    }, [questions])
+
+    useEffect(() => { 'selectedVote', selectedVote }, [selectedVote])
     return (
         <div className="flex flex-col gap-4 items-center h-screen">
             <div className="text-xl flex items-end gap-2 justify-center mb-2">
