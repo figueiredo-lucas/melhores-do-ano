@@ -8,10 +8,14 @@ export const useDataListener = (schema, setter) => {
 
     useEffect(() => {
         const dbRef = ref(db, schema)
-        onValue(dbRef, snapshot => {
+        const unsubscribe = onValue(dbRef, snapshot => {
             const data = snapshot.val()
             setter(data)
         })
+
+        return () => {
+            unsubscribe()
+        }
     }, [schema, setter])
 
 }

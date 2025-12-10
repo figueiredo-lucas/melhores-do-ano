@@ -1,0 +1,106 @@
+.quadrado {
+
+    --altura: 300px;
+    --largura: 400px;
+    --topo: 142px;
+    --lateral: 120px;
+
+    width: calc(var(--largura) + var(--lateral));
+    height: calc(var(--altura) + var(--topo));
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    animation: shake 0.5s linear 8 1s;
+    filter: drop-shadow(-10px 30px 90px gold);
+
+    .topo {
+
+        position: absolute;
+        bottom: var(--altura);
+        height: var(--topo);
+        width: var(--largura);
+        right: 0;
+        transform: skew(42deg, 0deg);
+        transform-origin: bottom;
+
+        .topo-cima {
+            height: calc(var(--topo) / 2);
+            width: var(--largura);
+            background-color: #cfc09f;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 200px;
+                background-color: black;
+                box-shadow: inset -8px 3px 3px rgba(255, 255, 255, .4);
+                height: 5px;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .topo-baixo {
+            height: calc(var(--topo) / 2);
+            width: var(--largura);
+            background-color: #cfc09f;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 200px;
+                background-color: black;
+                box-shadow: inset -8px -1.5px 1.5px rgba(255, 255, 255, .35);
+                height: 5px;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    .frente {
+        position: absolute;
+        height: var(--altura);
+        width: var(--largura);
+        background-color: #bd9622;
+        bottom: 0;
+        right: 0;
+    }
+
+    .lateral {
+
+        position: absolute;
+        right: var(--largura);
+        height: var(--altura);
+        width: var(--lateral);
+        bottom: 0;
+        background-color: #3a2c0f;
+        transform: skew(0deg, 50deg);
+        transform-origin: right;
+    }
+
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
+    }
+}

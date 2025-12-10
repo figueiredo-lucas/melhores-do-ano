@@ -1,0 +1,96 @@
+.porta-moeda {
+
+    overflow: hidden;
+    width: 100vw;
+    height: 60vh;
+    position: relative;
+    margin-bottom: -75px;
+    padding-top: 3rem;
+    z-index: 1;
+
+    .moeda {
+
+        border-radius: 50%;
+        width: 192px;
+        background: radial-gradient(#ffecb3 12%, #cfc09f 40%, #3a2c0f 80%);
+        height: 192px;
+        top: -200px;
+        left: 60%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        box-shadow: 4px 8px 12px rgba(0, 0, 0, .2);
+        animation: cair-direita 1s ease-in 4;
+
+        &.moeda-esquerda {
+            left: auto;
+            right: 60%;
+            animation: cair-esquerda 1s ease-in 4 .5s;
+        }
+
+        &.moeda-certa {
+
+            top: 110%;
+            left: calc(50% - 100px);
+            transform: rotateY(180deg);
+            animation: subir 1s ease-out forwards 6s, rodar-moeda 2s linear infinite 7s;
+
+            /* backface-visibility: hidden; */
+            transform-style: preserve-3d;
+
+            &::after {
+                @apply rounded-full;
+                content: '';
+                right: 0px;
+                bottom: 0px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background: radial-gradient(#ffecb3 12%, #cfc09f 40%, #3a2c0f 80%);
+                transform: rotateY(180deg);
+                transform-style: preserve-3d;
+                backface-visibility: hidden;
+            }
+
+
+        }
+    }
+
+
+}
+
+@keyframes rodar-moeda {
+
+    50% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+@keyframes subir {
+
+    100% {
+        top: 40%;
+    }
+
+}
+
+@keyframes cair-direita {
+
+    100% {
+        top: 100%;
+        left: calc(50% - 130px)
+    }
+}
+
+@keyframes cair-esquerda {
+
+    100% {
+        top: 100%;
+        right: calc(50% - 130px)
+    }
+}

@@ -73,7 +73,7 @@ const Admin = () => {
                 <button className="btn btn-primary" onClick={prev} disabled={questions.current === 0}>Anterior</button>
                 <button className="btn btn-primary" onClick={next} disabled={
                     questions.current >= questions.items?.length - 1
-                    // || Object.values(currentQuestion.votes || {}).filter(Boolean).length < activeUsers.length
+                    || Object.values(currentQuestion.votes || {}).filter(Boolean).length < activeUsers.length
                 }>
                     Próxima</button>
                 <button className="btn btn-primary" onClick={reset} >Reiniciar</button>
