@@ -72,17 +72,19 @@ const Dashboard = () => {
 
     const confirm = () => {
         if (!selectedVote) return
-
+        let vote = selectedVote
         if (currentQuestion.title === 'Melhor anfitrião') {
-            setSelectedVote('Tia Cidinha')
+            // setSelectedVote('Tia Cidinha')
+            vote = 'Tia Cidinha'
         } 
         else if (currentQuestion.title === 'Melhor Victor e Izabela') { 
             const filteredUsers = Object.values(users).filter(u => u.name !== 'Izabela' && u.name !== 'Victor')
-            setSelectedVote(filteredUsers[Math.floor(Math.random() * filteredUsers.length)].name)
+            // setSelectedVote(filteredUsers[Math.floor(Math.random() * filteredUsers.length)].name)
+            vote = filteredUsers[Math.floor(Math.random() * filteredUsers.length)].name
         }
         
         setAlreadyVoted(true)
-        questionsRepo.update(`items/${questions.current}/votes/${user.name}`, selectedVote)
+        questionsRepo.update(`items/${questions.current}/votes/${user.name}`, vote)
         toast.success('Tá votado, agora espera')
     }
 
