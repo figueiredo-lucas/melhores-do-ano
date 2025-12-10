@@ -10,7 +10,7 @@
     overflow: hidden;
     position: relative;
     margin: auto;
-    animation: shake 0.5s linear 8 1s;
+    animation: shake 0.5s ease-in-out 12 1s;
     filter: drop-shadow(-10px 30px 90px gold);
 
     .topo {

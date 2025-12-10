@@ -1,6 +1,9 @@
+
+import Moeda from './Moeda'
 import './porta-moeda.css'
 
-const PortaMoeda = ({ currentQuestion }) => {
+const PortaMoeda = ({ currentQuestion, maisVotado, users }) => {
+
     return (
         <div className="porta-moeda">
 
@@ -10,14 +13,12 @@ const PortaMoeda = ({ currentQuestion }) => {
                 </h1>
             </div>
 
-            <div className="moeda"></div>
-            <div className="moeda moeda-esquerda"></div>
+            {Object.values(users || {})?.map((user, idx) => {
+                return <Moeda key={user.name} tipo={idx % 2 ? 'direita' : 'esquerda'} delay={idx * 500} url={user.imgUrl} />
+            })}
 
-            <div className="avatar moeda moeda-certa" >
-                <div className="ring-4 ring-offset-0 ring-[#cfc09f] rounded-full">
-                    <img src={`images/lucas/0.png`} />
-                </div>
-            </div>
+            <Moeda tipo="certa" url={maisVotado?.imgUrl} />
+
 
         </div>
     )

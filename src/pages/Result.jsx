@@ -6,6 +6,7 @@ import Cofre from "../components/Cofre/Cofre"
 import PortaMoeda from "../components/PortaMoeda/PortaMoeda"
 import { useDataListener } from "../hooks/useDataListener"
 import Cartas from "../components/Cartas/Cartas"
+import { getMaisVotado } from "../utils"
 
 const Result = () => {
 
@@ -21,6 +22,8 @@ const Result = () => {
         return questions.items[questions.current]
     }, [questions])
 
+    const maisVotado = getMaisVotado(currentQuestion, users)
+
     useEffect(() => {
 
         const unsubscribe = questionsRepo.listen(setQuestions)
@@ -35,10 +38,10 @@ const Result = () => {
 
     return (
         <div>
-            {/* <PortaMoeda currentQuestion={currentQuestion} users={users} />
+            {/* <PortaMoeda currentQuestion={currentQuestion} maisVotado={maisVotado} users={users} />
             <Cofre /> */}
 
-            <Cartas />
+            <Cartas currentQuestion={currentQuestion} maisVotado={maisVotado} users={users} />
         </div>
     )
 }
