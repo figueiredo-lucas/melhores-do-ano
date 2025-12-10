@@ -86,7 +86,7 @@ const Admin = () => {
                             'ring-success': !!currentQuestion.votes?.[u.name],
                             'ring-neutral': !currentQuestion.votes?.[u.name]
                         })}>
-                            <img src={`${u.imgUrl}/0.png`} />
+                            <img src={`images/${u.imgUrl}/0.png`} />
                         </div>
                     </div>
                 ))}

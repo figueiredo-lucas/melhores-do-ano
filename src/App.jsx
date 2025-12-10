@@ -6,6 +6,7 @@ import Dashboard from './pages/Dashboard'
 import { ProtectedRoute } from './routes/ProtectedRoute'
 import * as store from './store'
 import Admin from './pages/Admin'
+import Result from './pages/Result'
 
 function App() {
 
@@ -29,6 +30,7 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/result" element={<Result />} />
                 <Route
                     path="/"
                     element={

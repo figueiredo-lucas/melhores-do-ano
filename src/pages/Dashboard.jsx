@@ -146,7 +146,7 @@ const Dashboard = () => {
                                             'ring-primary': selectedVote !== u.name,
                                             'ring-accent': selectedVote === u.name
                                         })}>
-                                            <img src={`${u.imgUrl}/0.png`} />
+                                            <img src={`images/${u.imgUrl}/0.png`} />
                                         </div>
                                     </div>
                                     {idx % 2 === 0 && <span>{u.nickname}</span>}

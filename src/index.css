@@ -54,6 +54,7 @@
     &::after {
         background: none;
         content: attr(data-heading) / "";
+        text-align: inherit;
         left: 0;
         top: 0;
         z-index: -1;
@@ -63,5 +64,195 @@
             0 1px 1px #c6bb9f,
             5px 5px 10px rgba(0, 0, 0, 0.4),
             -5px -5px 10px rgba(0, 0, 0, 0.4);
+    }
+}
+
+.porta-moeda {
+    @apply overflow-hidden w-screen left-0 top-0 h-[60vh] z-1 relative -mb-[75px] pt-12;
+
+    .moeda {
+        @apply rounded-full w-48 bg-red-400 h-48 absolute -top-[200px] left-[60%];
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 40px;
+        box-shadow: 4px 8px 12px rgba(0, 0, 0, .2);
+        animation: cair-direita 1s ease-in 4;
+
+        &.moeda-esquerda {
+            left: auto;
+            right: 60%;
+            animation: cair-esquerda 1s ease-in 4 .5s;
+        }
+
+        &.moeda-certa {
+
+            top: 110%;
+            left: calc(50% - 100px);
+            animation: subir .5s ease-out forwards 6s, rodar-moeda 2s linear infinite 6s;
+
+            /* backface-visibility: hidden; */
+            transform-style: preserve-3d;
+
+            &::after {
+                @apply rounded-full;
+                content: '';
+                right: 0px;
+                bottom: 0px;
+                position: absolute;
+                top: 0px;
+                left: 0px;
+                background: radial-gradient(#ffecb3 12%, #cfc09f 40%, #3a2c0f 80%);
+                transform: rotateY(180deg);
+                transform-style: preserve-3d;
+                backface-visibility: hidden;
+            }
+
+
+        }
+    }
+
+
+}
+
+.quadrado {
+
+    --altura: 300px;
+    --largura: 400px;
+    --topo: 142px;
+    --lateral: 120px;
+
+    width: calc(var(--largura) + var(--lateral));
+    height: calc(var(--altura) + var(--topo));
+    overflow: hidden;
+    position: relative;
+    margin: auto;
+    animation: shake 0.5s linear 8 1s;
+    filter: drop-shadow(-10px 30px 90px gold);
+
+    .topo {
+
+        position: absolute;
+        bottom: var(--altura);
+        height: var(--topo);
+        width: var(--largura);
+        right: 0;
+        transform: skew(42deg, 0deg);
+        transform-origin: bottom;
+
+        .topo-cima {
+            height: calc(var(--topo) / 2);
+            width: var(--largura);
+            background-color: #cfc09f;
+            position: relative;
+
+            &::after {
+                content: '';
+                position: absolute;
+                width: 200px;
+                background-color: black;
+                box-shadow: inset -8px 3px 3px rgba(255, 255, 255, .4);
+                height: 5px;
+                bottom: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        .topo-baixo {
+            height: calc(var(--topo) / 2);
+            width: var(--largura);
+            background-color: #cfc09f;
+            position: relative;
+
+            &::before {
+                content: '';
+                position: absolute;
+                width: 200px;
+                background-color: black;
+                box-shadow: inset -8px -1.5px 1.5px rgba(255, 255, 255, .35);
+                height: 5px;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+    }
+
+    .frente {
+        position: absolute;
+        height: var(--altura);
+        width: var(--largura);
+        background-color: #bd9622;
+        bottom: 0;
+        right: 0;
+    }
+
+    .lateral {
+
+        position: absolute;
+        right: var(--largura);
+        height: var(--altura);
+        width: var(--lateral);
+        bottom: 0;
+        background-color: #3a2c0f;
+        transform: skew(0deg, 50deg);
+        transform-origin: right;
+    }
+
+}
+
+@keyframes rodar-moeda {
+
+    0% {
+        transform: rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateY(360deg);
+    }
+}
+
+@keyframes subir {
+
+    100% {
+        top: 40%;
+    }
+
+}
+
+@keyframes cair-direita {
+
+    100% {
+        top: 100%;
+        left: calc(50% - 130px)
+    }
+}
+
+@keyframes cair-esquerda {
+
+    100% {
+        top: 100%;
+        right: calc(50% - 130px)
+    }
+}
+
+@keyframes shake {
+
+    0%,
+    100% {
+        transform: translateX(0);
+    }
+
+    25% {
+        transform: translateX(-5px);
+    }
+
+    50% {
+        transform: translateX(5px);
+    }
+
+    75% {
+        transform: translateX(-5px);
     }
 }
