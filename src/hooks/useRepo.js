@@ -35,8 +35,6 @@ export const useRepo = schema => {
     }, [schema])
 
     const updateById = useCallback((id, data) => {
-        console.log(`${schema}/${id}`, data)
-        
         const dataRef = ref(db, `${schema}/${id}`)
         
         if (data === Object(data))
@@ -53,7 +51,6 @@ export const useRepo = schema => {
     const listen = useCallback(setter => {
         const dbRef = ref(db, schema)
         return onValue(dbRef, snapshot => {
-            console.log(snapshot.val())
             const data = snapshot.val()
             setter(data)
         })

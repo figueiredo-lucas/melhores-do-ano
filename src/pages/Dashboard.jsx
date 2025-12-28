@@ -7,6 +7,9 @@ import cn from 'clsx'
 
 import * as store from '../store'
 import { useRepo } from '../hooks/useRepo'
+import { useDataListener } from '../hooks/useDataListener'
+import Singles from '../components/Singles'
+import Couples from '../components/Couples'
 
 const MSG_EDIT = [
     'Quem disse q pode?',
@@ -32,15 +35,24 @@ const Dashboard = () => {
     const [editIdx, setEditIdx] = useState(0)
     const [hideEdit, setHideEdit] = useState(false)
     const [removeEdit, setRemoveEdit] = useState(false)
-    const [users, setUsers] = useState([])
     const [selectedVote, setSelectedVote] = useState(null)
     const [alreadyVoted, setAlreadyVoted] = useState(false)
+    const [questions, setQuestions] = useState({})
     const prevQuestion = useRef(null)
 
-    const usersRepo = useRepo('users')
     const questionsRepo = useRepo('questions')
 
-    const [questions, setQuestions] = useState({})
+    const users = useDataListener('users')
+    const couples = useDataListener('couples')
+
+    const joinedCouples = useMemo(() => {
+
+        if (!couples || Object.values(couples).length === 0) return []
+
+        return couples.map(couple => Object.keys(couple).sort().join('|'))
+
+    }, [couples])
+
 
     const currentQuestion = useMemo(() => {
         if (!questions || !questions.items || questions.items.length === 0)
@@ -68,18 +80,31 @@ const Dashboard = () => {
 
         setSelectedVote(selectedVote === userName ? null : userName)
 
+
+        if (currentQuestion.excludes) {
+
+            const excluded = currentQuestion.excludes.sort().join('|')
+
+            if (excluded === userName) {
+
+                const people = currentQuestion.couples ? joinedCouples : Object.values(users).map(u => u.name)
+                const filtered = people.filter(c => c !== excluded)
+
+                setTimeout(() => {
+                    setSelectedVote(filtered[Math.floor(Math.random() * filtered.length)])
+                }, 300)
+                toast.error('Naum 😊', { autoClose: 300 })
+
+            }
+
+        }
+
     }
 
     const confirm = () => {
         if (!selectedVote) return
-        let vote = selectedVote
-        if (currentQuestion.title === 'Melhor anfitrião') {
-            vote = 'Tia Cidinha'
-        }
-        else if (currentQuestion.title === 'Melhor Victor e Izabela') {
-            const filteredUsers = Object.values(users).filter(u => u.name !== 'Izabela' && u.name !== 'Victor')
-            vote = filteredUsers[Math.floor(Math.random() * filteredUsers.length)].name
-        }
+
+        let vote = currentQuestion.overrides || selectedVote
 
         setAlreadyVoted(true)
         questionsRepo.update(`items/${questions.current}/votes/${user.name}`, vote)
@@ -89,14 +114,12 @@ const Dashboard = () => {
     useEffect(() => {
 
         const unsubscribe = questionsRepo.listen(setQuestions)
-        const unsubscribeUsers = usersRepo.listen(setUsers)
 
         return () => {
             unsubscribe()
-            unsubscribeUsers()
         }
 
-    }, [questionsRepo, usersRepo])
+    }, [questionsRepo])
 
     useEffect(() => {
         if (prevQuestion.current !== questions.current) {
@@ -109,7 +132,6 @@ const Dashboard = () => {
         }
     }, [questions])
 
-    useEffect(() => { 'selectedVote', selectedVote }, [selectedVote])
     return (
         <div className="flex flex-col gap-4 items-center h-screen">
             <div className="text-xl flex items-end gap-2 justify-center mb-2">
@@ -138,34 +160,11 @@ const Dashboard = () => {
 
             </div>
 
-            <div className="flex w-full px-6 flex-1 items-center">
-                <div className="gap-4 w-full grid grid-cols-2">
-                    {Object.values(users || {}).filter(u => u.name !== user.name && u.name !== 'Tia Cidinha').map((u, idx) => {
-                        return (
-                            <div className={cn("w-full py-3", { 'text-right': idx % 2 === 1 })}>
-                                <div key={u.name}
-                                    className={cn("badge badge-lg", {
-                                        'badge-primary': selectedVote !== u.name,
-                                        'badge-accent': selectedVote === u.name,
-                                    })}
-                                    onClick={() => vote(u.name)}>
+            {console.log(user.name)}
 
-                                    {idx % 2 !== 0 && <span>{u.nickname}</span>}
-                                    <div className="avatar">
-                                        <div className={cn("w-12 rounded-full ring-2 ring-offset-2", {
-                                            'ring-primary': selectedVote !== u.name,
-                                            'ring-accent': selectedVote === u.name
-                                        })}>
-                                            <img src={`images/${u.imgUrl}/0.png`} />
-                                        </div>
-                                    </div>
-                                    {idx % 2 === 0 && <span>{u.nickname}</span>}
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
-            </div>
+            {currentQuestion.couples
+                ? <Couples users={users} couples={couples} selectedVote={selectedVote} vote={vote} />
+                : <Singles userName={user.name} users={users} selectedVote={selectedVote} vote={vote} />}
 
             <div className="flex items-end w-full p-6">
                 <button className="btn btn-neutral btn-block" onClick={confirm} disabled={alreadyVoted || !selectedVote}>

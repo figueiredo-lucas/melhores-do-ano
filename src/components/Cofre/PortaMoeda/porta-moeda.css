@@ -41,14 +41,18 @@
             transform-style: preserve-3d;
 
             &::after {
-                @apply rounded-full;
+                border-radius: 50%;
                 content: '';
                 right: 0px;
                 bottom: 0px;
                 position: absolute;
                 top: 0px;
                 left: 0px;
-                background: radial-gradient(#ffecb3 12%, #cfc09f 40%, #3a2c0f 80%);
+                background: #ffecb3;
+                background-image: url('images/melhoresdoanologo.png');
+                background-position: center center;
+                background-repeat: no-repeat;
+                background-size: calc(100% + 30px);
                 transform: rotateY(180deg);
                 transform-style: preserve-3d;
                 backface-visibility: hidden;
