@@ -135,7 +135,7 @@ const Dashboard = () => {
     if (!currentQuestion) {
 
         return (
-            <div className="flex flex-col gap-4 items-center h-screen">
+            <div className="flex flex-col gap-4 items-center h-screen justify-between">
                 <div className="text-xl flex items-end gap-2 justify-center mb-2">
                     <div>
                         <span className="text-sm">Oi, </span>{user?.nickname}
@@ -156,10 +156,17 @@ const Dashboard = () => {
                             Não fez mais que sua obrigação!
                         </h1>
                     </div>
-
+                </div>
+                <div className="flex-1">
+                    <div class="avatar animate-heartbeat">
+                        <div class="mask mask-heart w-64">
+                            <img src="images/dedao.webp" alt="Tchauzinho" className="w-64 h-64 rounded-lg" />
+                        </div>
+                    </div>
                 </div>
 
-                <div className="flex flex-1">
+
+                <div className="flex flex-1 items-center mb-10">
                     <h1 className="text-4xl uppercase golden-text" data-heading="Tchauzinho :)">
                         Tchauzinho :)
                     </h1>

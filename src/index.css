@@ -66,3 +66,35 @@
             -5px -5px 10px rgba(0, 0, 0, 0.4);
     }
 }
+
+.animate-heartbeat {
+    animation: heartbeat 1.5s ease-in-out infinite;
+    filter: drop-shadow(4px 6px 6px rgba(255, 236, 179, 0.5));
+}
+
+@keyframes heartbeat {
+    0% {
+        transform: scale(1);
+        filter: drop-shadow(4px 6px 6px rgba(255, 236, 179, 0.5));
+    }
+
+    14% {
+        transform: scale(1.1);
+        filter: drop-shadow(4px 6px 12px rgba(255, 236, 179, 0.5));
+    }
+
+    28% {
+        transform: scale(1);
+        filter: drop-shadow(4px 6px 6px rgba(255, 236, 179, 0.5));
+    }
+
+    42% {
+        transform: scale(1.1);
+        filter: drop-shadow(4px 6px 12px rgba(255, 236, 179, 0.5));
+    }
+
+    70% {
+        transform: scale(1);
+        filter: drop-shadow(4px 6px 6px rgba(255, 236, 179, 0.5));
+    }
+}
