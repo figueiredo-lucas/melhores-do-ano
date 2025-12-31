@@ -25,15 +25,13 @@ const Admin = () => {
 
     const currentQuestion = useMemo(() => {
         if (!questions || !questions.items || questions.items.length === 0)
-            return { title: 'Parece que não tem votação hoje' }
+            return { title: '' }
 
         return questions.items[questions.current]
     }, [questions])
 
     const allVoted = useMemo(() => {
-        if (!currentQuestion.votes) return false
-
-        console.log('VOTOU', currentQuestion.votes)
+        if (!currentQuestion?.votes) return false
 
         const votedUsers = Object.values(currentQuestion.votes).filter(Boolean)
 
@@ -71,7 +69,16 @@ const Admin = () => {
 
         player.addEventListener('ended', onEnd)
 
-        player.play()
+        player.play().catch((e) => {
+
+            console.log('aqui?')
+
+            console.log(e)
+
+            setTimeout(() => {
+                navigate('/result')
+            }, 2000)
+        })
 
         return () => {
             player.removeEventListener('ended', onEnd)
@@ -104,18 +111,20 @@ const Admin = () => {
                     <button className="btn btn-primary" onClick={reset} >Reiniciar</button>
                 </div> */}
 
-                <div className="fixed flex gap-4 bottom-4 right-4">
-                    {activeUsers.map((u, idx) => (
-                        <div className="avatar animate-bounce" style={{ animationDelay: `${idx * 100}ms` }} key={u.name}>
-                            <div className={cn("w-24 rounded-full ring-4 ring-offset-2", {
-                                'ring-success': !!currentQuestion.votes?.[u.name],
-                                'ring-neutral': !currentQuestion.votes?.[u.name]
-                            })}>
-                                <img src={`images/${u.imgUrl}/0.png`} />
+                {currentQuestion &&
+                    <div className="fixed flex gap-4 bottom-4 right-4">
+                        {activeUsers.map((u, idx) => (
+                            <div className="avatar animate-bounce" style={{ animationDelay: `${idx * 100}ms` }} key={u.name}>
+                                <div className={cn("w-24 rounded-full ring-4 ring-offset-2", {
+                                    'ring-success': !!currentQuestion?.votes?.[u.name],
+                                    'ring-neutral': !currentQuestion?.votes?.[u.name]
+                                })}>
+                                    <img src={`images/${u.imgUrl}/0.png`} />
+                                </div>
                             </div>
-                        </div>
-                    ))}
-                </div>
+                        ))}
+                    </div>
+                }
 
             </div>
         </>

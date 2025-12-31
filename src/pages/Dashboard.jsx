@@ -56,7 +56,7 @@ const Dashboard = () => {
 
     const currentQuestion = useMemo(() => {
         if (!questions || !questions.items || questions.items.length === 0)
-            return { title: 'Parece que não tem votação hoje' }
+            return { title: '' }
 
         return questions.items[questions.current]
     }, [questions])
@@ -131,6 +131,43 @@ const Dashboard = () => {
 
         }
     }, [questions])
+
+    if (!currentQuestion) {
+
+        return (
+            <div className="flex flex-col gap-4 items-center h-screen">
+                <div className="text-xl flex items-end gap-2 justify-center mb-2">
+                    <div>
+                        <span className="text-sm">Oi, </span>{user?.nickname}
+                    </div>
+                    {!removeEdit &&
+                        <span className={cn("tooltip tooltip-bottom transition-opacity duration-1000", { 'opacity-0': hideEdit })}
+                            data-tip="Trocar de apelido"
+                            onClick={onEditClick}>
+                            <button className="btn btn-sm btn-ghost btn-square">
+                                {hideEdit && <PiHandPeace className="text-xl" />}
+                                {!hideEdit && <MdEdit className="text-xl" />}
+                            </button>
+                        </span>}
+                </div>
+                <div className="px-6 flex-1 flex items-center">
+                    <div className="text-center">
+                        <h1 className="text-3xl uppercase golden-text multiline" data-heading="Não fez mais que sua obrigação!">
+                            Não fez mais que sua obrigação!
+                        </h1>
+                    </div>
+
+                </div>
+
+                <div className="flex flex-1">
+                    <h1 className="text-4xl uppercase golden-text" data-heading="Tchauzinho :)">
+                        Tchauzinho :)
+                    </h1>
+                </div>
+            </div>
+        )
+
+    }
 
     return (
         <div className="flex flex-col gap-4 items-center h-screen">

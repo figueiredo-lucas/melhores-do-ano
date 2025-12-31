@@ -17,7 +17,7 @@ const PortaMoeda = ({ currentQuestion, maisVotado, users }) => {
                 return <Moeda key={user.name} tipo={idx % 2 ? 'direita' : 'esquerda'} delay={idx * 500} url={user.imgUrl} />
             })}
 
-            <Moeda tipo="certa" url={maisVotado?.imgUrl} />
+            <Moeda tipo="certa" maisVotado={maisVotado} />
 
 
         </div>

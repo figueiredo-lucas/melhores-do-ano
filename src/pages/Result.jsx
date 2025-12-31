@@ -7,16 +7,19 @@ import { useRepo } from "../hooks/useRepo"
 import { useEffect } from "react"
 import { useNavigate } from "react-router"
 import { useCallback } from "react"
+import Aviao from "../components/Aviao/Aviao"
 
 const ANIMATIONS = [
     Cofre,
     Cartas,
+    Aviao,
 ]
 
 const Result = () => {
 
     const users = useDataListener('users')
     const questions = useDataListener('questions')
+    const external = useDataListener('external')
     const questionsRepo = useRepo('questions')
 
     const navigate = useNavigate()
@@ -28,7 +31,7 @@ const Result = () => {
         return questions.items[questions.current]
     }, [questions])
 
-    const maisVotado = getMaisVotado(currentQuestion, users)
+    const maisVotado = getMaisVotado(currentQuestion, users, external)
 
     const Animation = useMemo(() => {
         // eslint-disable-next-line react-hooks/purity
@@ -37,7 +40,7 @@ const Result = () => {
 
     const next = useCallback(() => {
 
-        if (questions.current >= questions.items.length - 1) return
+        // if (questions.current >= questions.items.length - 1) return
 
         questionsRepo.update('current', questions.current + 1)
         navigate('/admin')
@@ -53,8 +56,6 @@ const Result = () => {
     }, [questions, questionsRepo, navigate])
 
     const reset = useCallback(() => {
-
-        console.log(questions)
 
         questionsRepo.update('items', questions.items.reduce((acc, curr, idx) => ({
             ...acc,

@@ -7,6 +7,7 @@ import { ProtectedRoute } from './routes/ProtectedRoute'
 import * as store from './store'
 import Admin from './pages/Admin'
 import Result from './pages/Result'
+import Initial from './pages/Initial'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin" element={<Admin />} />
+                <Route path="/initial" element={<Initial />} />
                 <Route path="/result" element={<Result />} />
                 <Route
                     path="/"

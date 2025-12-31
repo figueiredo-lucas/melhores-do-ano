@@ -23,10 +23,13 @@ export const getMaisVotado = (currentQuestion, users, external) => {
             return acc
         }, {})
         
-        name = Object.keys(votes).sort((a, b) => votes[b] - votes[a])[0]
+        const sortedVotes = Object.keys(votes).sort((a, b) => votes[b] - votes[a])
+        const winners = sortedVotes.filter(k => votes[k] === votes[sortedVotes[0]])
+
+        name = winners[Math.floor(Math.random() * winners.length)]
         
     }
-
+    
     if (currentQuestion.couples) {
         const ppl = name.split('|')
         

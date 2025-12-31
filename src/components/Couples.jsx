@@ -5,8 +5,6 @@ const Couples = ({ users, couples, selectedVote, vote }) => {
 
     const external = useDataListener('external')
 
-    console.log(users, external, couples)
-
     return (
         <div className="flex w-full px-6 flex-1 items-center">
             <div className="gap-8 w-full flex flex-col">

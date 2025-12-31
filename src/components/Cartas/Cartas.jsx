@@ -22,9 +22,46 @@ const Cartas = ({ currentQuestion, maisVotado, users }) => {
 
     useEffect(() => {
 
-        if (maisVotado?.name && cartasRef.current) {
+        if (!cartasRef.current) return
+
+        if (maisVotado?.length > 1) {
+
+            maisVotado.forEach(mv => {
+
+                setTimeout(() => {
+                    let carta = cartasRef.current.querySelector(`#${mv.name}`)
+
+                    if (!carta) {
+                        console.log(cartasRef.current.childNodes[0])
+                        carta = cartasRef.current.childNodes[0].cloneNode(true)
+                        carta.id = mv.name
+                        carta.childNodes[0].innerText = mv.nickname
+                        console.log(mv)
+                        carta.childNodes[1].childNodes[0].childNodes[0].src = `images/${mv.imgUrl}/0.png`
+                        cartasRef.current.appendChild(carta)
+                        carta.classList.add('opacity-0')
+                        setTimeout(() => {
+                            carta.classList.add('opacity-100')
+                        }, 500)
+                    }
+
+                    carta.classList.add('selected')
+
+                }, 5500)
+            })
+
+        } else if (maisVotado?.name) {
             setTimeout(() => {
-                const carta = cartasRef.current.querySelector(`#${maisVotado.name}`)
+                let carta = cartasRef.current.querySelector(`#${maisVotado.name}`)
+
+                if (!carta) {
+                    console.log(cartasRef.current.childNodes[0])
+                    carta = cartasRef.current.childNodes[0].cloneNode(true)
+                    carta.id = maisVotado.name
+                    carta.childNodes[0].innerText = maisVotado.nickname
+                    carta.childNodes[1].childNodes[0].childNodes[0].src = `images/${maisVotado.imgUrl}/0.png`
+                    cartasRef.current.appendChild(carta)
+                }
                 carta.classList.add('selected')
             }, 5500)
         }

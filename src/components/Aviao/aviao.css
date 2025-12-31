@@ -1,0 +1,242 @@
+:root {
+    --asa: #2586e0;
+    --corpo: #1a319b;
+    --escala: 0.2;
+}
+
+.envolucro {
+
+    position: relative;
+    margin: 0 auto;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+
+    .explosao {
+        /* display: none; */
+        position: absolute;
+        background-image: url(/images/explosao.gif);
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        height: 350px;
+        width: 350px;
+        left: -70px;
+        top: calc(50% - 175px);
+    }
+
+    .chao {
+        width: 100vw;
+        background: green;
+        height: 30px;
+        margin-top: calc(50vh + 14px);
+        border-top: 2px dotted #121c22;
+    }
+
+    .mar {
+        width: 100vw;
+        flex: 1;
+        background: #303097;
+    }
+
+    .predios {
+        display: flex;
+        position: fixed;
+        top: calc(50% - 100px);
+        left: -172px;
+        gap: 12px;
+        animation: aproximar-predio 1s ease-out forwards 2s;
+
+
+
+        .predio {
+
+            width: 80px;
+            height: 250px;
+            background: #333;
+
+        }
+
+    }
+
+    .aviao {
+        position: absolute;
+        animation: mover-aviao 3s linear forwards;
+        right: 0px;
+        bottom: 50vh;
+        transform: scale(var(--escala));
+
+        .asa-direita {
+            position: absolute;
+            left: 9px;
+            top: 45px;
+            transform-style: preserve-3d;
+            transform: skew(15deg, 0deg);
+            transform-origin: top left;
+            border-top: 70px solid transparent;
+            border-left: 150px solid transparent;
+            border-right: 300px solid var(--asa);
+            border-bottom: 35px solid var(--asa);
+            width: 0;
+        }
+
+        .miolo {
+            position: absolute;
+            width: 0;
+            left: 70px;
+            top: 30px;
+            border-top: 80px solid transparent;
+            border-left: 139px solid transparent;
+            border-right: 278px solid var(--corpo);
+            border-bottom: 40px solid var(--corpo);
+            transform: skew(345deg, 15.9deg);
+            transform-origin: top left;
+
+        }
+
+        .asa-esquerda {
+            position: absolute;
+            left: 40px;
+            top: 150px;
+            transform-style: preserve-3d;
+            transform: skew(23deg, 0deg) rotateZ(4deg);
+            transform-origin: top left;
+            border-bottom: 60px solid transparent;
+            border-left: 150px solid transparent;
+            border-right: 300px solid var(--asa);
+            border-top: 30px solid var(--asa);
+            width: 0;
+            filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, .2));
+        }
+    }
+
+    .anel {
+        position: absolute;
+        left: 80px;
+        bottom: -20px;
+
+        background-image: url('/images/melhoresdoanologo.png');
+        background-position: center center;
+        background-repeat: no-repeat;
+        background-size: calc(100% + 20px);
+
+        &.vencedor {
+
+            width: 40px;
+            left: 30px;
+            bottom: auto;
+            top: 50%;
+            background-image: none;
+            background: none;
+            animation: crescer-moeda 2s ease-out forwards 3s;
+            transform: rotateY(180deg);
+            opacity: 0;
+        }
+    }
+
+}
+
+@keyframes crescer-moeda {
+    0% {
+        width: 40px;
+        left: 30px;
+        top: 50%;
+        transform: rotateY(180deg);
+
+    }
+
+    1% {
+        opacity: 1;
+    }
+
+    50% {
+        top: 0%;
+    }
+
+    100% {
+        width: 400px;
+        left: calc(50% - 200px);
+        top: 20%;
+        transform: rotateY(1440deg);
+        opacity: 1;
+    }
+}
+
+@keyframes aproximar-predio {
+
+    0% {
+        left: -172px;
+    }
+
+    99% {
+        opacity: 1;
+    }
+
+    100% {
+        left: 10px;
+        opacity: 0;
+    }
+}
+
+@keyframes mover-aviao {
+
+    0% {
+        right: 0px;
+        bottom: 50vh;
+    }
+
+    35% {
+        transform: scale(var(--escala)) rotate(0deg);
+        bottom: 51vh;
+        right: 51vw;
+    }
+
+    40% {
+        transform: scale(var(--escala)) rotate(90deg);
+        bottom: 56vh;
+        right: 53vw;
+    }
+
+    45% {
+        transform: scale(var(--escala)) rotate(180deg);
+        bottom: 60vh;
+        right: 48vw;
+    }
+
+    50% {
+        transform: scale(var(--escala)) rotate(270deg);
+        bottom: 55vh;
+        right: 45vw;
+    }
+
+    55% {
+        transform: scale(var(--escala)) rotate(360deg);
+        bottom: 50vh;
+        right: 48vw;
+    }
+
+    70% {
+        transform: scale(var(--escala)) rotate(360deg);
+        bottom: 50vh;
+        right: 63vw;
+    }
+
+    95% {
+        transform: scale(var(--escala)) rotate(360deg);
+        bottom: 50vh;
+        right: 93vw;
+    }
+
+    99% {
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(var(--escala)) rotate(360deg);
+        right: 100vw;
+        opacity: 0;
+    }
+
+}
