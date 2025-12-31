@@ -1,8 +1,7 @@
 import { useState, useMemo, useEffect, useRef } from 'react'
-import { useWireValue } from '@forminator/react-wire'
 import { PiHandPeace } from 'react-icons/pi'
 import { toast } from 'react-toastify'
-import { MdEdit } from 'react-icons/md'
+import { MdEdit, MdLogout } from 'react-icons/md'
 import cn from 'clsx'
 
 import * as store from '../store'
@@ -10,6 +9,7 @@ import { useRepo } from '../hooks/useRepo'
 import { useDataListener } from '../hooks/useDataListener'
 import Singles from '../components/Singles'
 import Couples from '../components/Couples'
+import { useSimpleAuth } from '../hooks/useSimpleAuth'
 
 const MSG_EDIT = [
     'Quem disse q pode?',
@@ -31,7 +31,7 @@ const MSG_EDIT = [
 
 const Dashboard = () => {
 
-    const user = useWireValue(store.user)
+    const { user, logout } = useSimpleAuth()
     const [editIdx, setEditIdx] = useState(0)
     const [hideEdit, setHideEdit] = useState(false)
     const [removeEdit, setRemoveEdit] = useState(false)
@@ -111,6 +111,10 @@ const Dashboard = () => {
         toast.success('Tá votado, agora espera')
     }
 
+    const logoff = () => {
+        store.user.set(null)
+    }
+
     useEffect(() => {
 
         const unsubscribe = questionsRepo.listen(setQuestions)
@@ -149,6 +153,9 @@ const Dashboard = () => {
                                 {!hideEdit && <MdEdit className="text-xl" />}
                             </button>
                         </span>}
+                    <button className="btn btn-sm btn-ghost btn-square absolute right-0 top-0" onClick={logout}>
+                        <MdLogout className="text-xl" />
+                    </button>
                 </div>
                 <div className="px-6 flex-1 flex items-center">
                     <div className="text-center">
@@ -191,6 +198,9 @@ const Dashboard = () => {
                             {!hideEdit && <MdEdit className="text-xl" />}
                         </button>
                     </span>}
+                <button className="btn btn-sm btn-ghost btn-square absolute right-0 top-0" onClick={logout}>
+                    <MdLogout className="text-xl" />
+                </button>
             </div>
 
             <div className="px-6">
