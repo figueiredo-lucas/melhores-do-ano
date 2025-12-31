@@ -7,7 +7,7 @@
 @font-face {
     font-family: 'AnoNovo';
     /* Give your font a descriptive name */
-    src: url('fonts/christmas-carol-star.ttf') format('truetype');
+    src: url('/fonts/christmas-carol-star.ttf') format('truetype');
     font-weight: normal;
     /* Optional: specify font weight */
     font-style: normal;
@@ -17,7 +17,7 @@
 @font-face {
     font-family: 'AnoNovo2';
     /* Give your font a descriptive name */
-    src: url('fonts/merry-winter.ttf') format('truetype');
+    src: url('/fonts/merry-winter.ttf') format('truetype');
     font-weight: normal;
     /* Optional: specify font weight */
     font-style: normal;
