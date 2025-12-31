@@ -204,11 +204,9 @@ const Dashboard = () => {
 
             </div>
 
-            {console.log(user.name)}
-
             {currentQuestion.couples
                 ? <Couples users={users} couples={couples} selectedVote={selectedVote} vote={vote} />
-                : <Singles userName={user.name} users={users} selectedVote={selectedVote} vote={vote} />}
+                : <Singles userName={user?.name} users={users} selectedVote={selectedVote} vote={vote} />}
 
             <div className="flex items-end w-full p-6">
                 <button className="btn btn-neutral btn-block" onClick={confirm} disabled={alreadyVoted || !selectedVote}>
