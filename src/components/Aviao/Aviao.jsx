@@ -73,7 +73,7 @@ const Aviao = ({ currentQuestion, maisVotado }) => {
 
                 <div className={`ring-4 ring-offset-0 rounded-full flex`}>
                     {finalUrl.map(u =>
-                        <div className={cn("overflow-hidden", { 'w-1/2': finalUrl.length > 1 })} key={u}>
+                        <div className={cn("overflow-hidden w-full", { 'w-1/2': finalUrl.length > 1 })} key={u}>
                             <img src={`images/${u}0.png`} />
                         </div>
                     )}
