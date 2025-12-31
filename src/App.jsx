@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { HashRouter, Routes, Route } from 'react-router-dom'
 import { useWireValue } from '@forminator/react-wire'
 import { ToastContainer } from 'react-toastify'
 import Login from './pages/Login'
@@ -27,7 +27,7 @@ function App() {
 
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <Routes>
                 <Route path="/login" element={<Login />} />
                 <Route path="/admin" element={<Admin />} />
@@ -43,7 +43,7 @@ function App() {
                 />
             </Routes>
             <ToastContainer position="bottom-right" hideProgressBar={true} pauseOnFocusLoss={false} />
-        </BrowserRouter>
+        </HashRouter>
     )
 }
 
