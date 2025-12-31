@@ -177,7 +177,7 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="flex flex-col gap-4 items-center h-screen">
+        <div className="flex flex-col gap-4 items-center h-dvh">
             <div className="text-xl flex items-end gap-2 justify-center mb-2">
                 <div>
                     <span className="text-sm">Oi, </span>{user?.nickname}
