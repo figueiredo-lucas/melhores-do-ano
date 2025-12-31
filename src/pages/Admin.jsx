@@ -3,6 +3,7 @@ import { useMemo, useEffect, useState } from "react"
 import cn from 'clsx'
 import { useRef } from "react"
 import { useNavigate } from "react-router"
+import Creditos from "../components/Creditos/Creditos"
 
 const Admin = () => {
 
@@ -69,11 +70,7 @@ const Admin = () => {
 
         player.addEventListener('ended', onEnd)
 
-        player.play().catch((e) => {
-
-            console.log('aqui?')
-
-            console.log(e)
+        player.play().catch(() => {
 
             setTimeout(() => {
                 navigate('/result')
@@ -110,6 +107,8 @@ const Admin = () => {
                         Próxima</button>
                     <button className="btn btn-primary" onClick={reset} >Reiniciar</button>
                 </div> */}
+
+                {!currentQuestion && <Creditos />}
 
                 {currentQuestion &&
                     <div className="fixed flex gap-4 bottom-4 right-4">
