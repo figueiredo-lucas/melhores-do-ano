@@ -135,7 +135,7 @@ const Dashboard = () => {
     if (!currentQuestion) {
 
         return (
-            <div className="flex flex-col gap-4 items-center h-screen justify-between">
+            <div className="flex flex-col gap-4 items-center h-dvh justify-between">
                 <div className="text-xl flex items-end gap-2 justify-center mb-2">
                     <div>
                         <span className="text-sm">Oi, </span>{user?.nickname}

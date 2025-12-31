@@ -46,9 +46,9 @@ const Initial = () => {
 
     return (
         <div className="flex flex-col justify-center items-center h-screen">
-            <img src="images/melhoresdoanologo.png" alt="Melhores do Ano Logo"
+            <img src="/images/melhoresdoanologo.png" alt="Melhores do Ano Logo"
                 style={{ width: '50vh', filter: 'drop-shadow(2px 4px 6px black)' }} />
-            <img src="images/qrc.svg" alt="QRCode"
+            <img src="/images/qrc.svg" alt="QRCode"
                 style={{ width: '30vh', border: '2px solid #9231b8', background: '#9231b8', borderRadius: '16px' }} />
         </div>
     )
