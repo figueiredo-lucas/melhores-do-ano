@@ -60,7 +60,7 @@ const Admin = () => {
 
         const idx = Math.floor(Math.random() * 13)
 
-        const player = new Audio(`/audio/reveal/${idx}.mp3`)
+        const player = new Audio(`audio/reveal/${idx}.mp3`)
 
         const onEnd = () => {
             modalRef.current.close()
